@@ -1,4 +1,3 @@
-
 # YumYard Backend-Side
 
 YumYard is a dynamic web application designed to help users discover, manage, and share recipes. This repository contains the backend-side code for YumYard.
