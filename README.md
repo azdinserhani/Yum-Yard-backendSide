@@ -56,7 +56,6 @@ YumYard is a dynamic web application designed to help users discover, manage, an
 - **Node.js:** JavaScript runtime environment.
 - **Express.js:** Web framework for Node.js.
 - **PostgreSQL:** Relational database system.
-- **Sequelize:** ORM for SQL databases.
 - **JWT:** For user authentication.
 - **dotenv:** For managing environment variables.
 
