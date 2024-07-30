@@ -4,12 +4,17 @@ import moment from "moment";
 export const getPost = async (req, res) => {
   const token = req.cookies.accessTocken;
   if (!token) return res.status(401).json("Not logged in!");
+  const userId = req.query.userId;
   //1-get all posts
   try {
-    const result = await db.query(
-      "SELECT p.*, u.id AS userId,u.profile_img,u.username FROM user_recipe AS p" +
-        " JOIN user_profile AS u ON u.id = p.user_id ORDER BY p.created_datetime DESC"
-    );
+    const query =
+      userId !== "undefined"
+        ? "SELECT p.*, u.id AS userId,u.profile_img,u.username FROM user_recipe AS p left" +
+          " JOIN user_profile AS u ON p.user_id = u.id WHERE user_id = $1"
+        : "SELECT p.*, u.id AS userId,u.profile_img,u.username FROM user_recipe AS p" +
+          " JOIN user_profile AS u ON u.id = p.user_id ORDER BY p.created_datetime DESC";
+    const params = userId !== "undefined" ? [userId] : [];
+    const result = await db.query(query, params);
     if (!result) return res.status(201).send({ msg: "No Recipes" });
     return res.status(200).send(result.rows);
   } catch (err) {

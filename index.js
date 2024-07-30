@@ -2,7 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import authRoute from "./routes/auth.js";
 import postRout from "./routes/posts.js";
-import userRoute from "./routes/user.js"
+import userRoute from "./routes/user.js";
+import relationshipsRoute from "./routes/relationships.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import "dotenv/config";
@@ -49,6 +50,7 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRout);
 app.use("/api/users", userRoute);
+app.use("/api/relation", relationshipsRoute);
 
 app.listen(port, () => {
   console.log(`server run in port ${port}`);
