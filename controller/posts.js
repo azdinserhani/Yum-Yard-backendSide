@@ -35,15 +35,16 @@ export const addPost = async (req, res) => {
     cuisine_type,
     defficulty_level,
     recipe_img,
-    cooking_time,
+    cooking_time_hours,
+    cooking_time_minutes
   } = req.body;
-  console.log("Request body:", req.body.recipe_img);
+ 
   jwt.verify(token, "secret Key", (err, userInfo) => {
     if (err) return res.status(500).send(err);
     try {
       db.query(
-        "INSERT INTO user_recipe(user_id,title,description,ingredients,instructions,created_datetime,cuisine_type,defficulty_level,recipe_img,cooking_time) " +
-          " VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
+        "INSERT INTO user_recipe(user_id,title,description,ingredients,instructions,created_datetime,cuisine_type,defficulty_level,recipe_img,cooking_time_hours,cooking_time_minutes) " +
+          " VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
         [
           userInfo.id,
           title,
@@ -54,7 +55,8 @@ export const addPost = async (req, res) => {
           cuisine_type,
           defficulty_level,
           recipe_img,
-          cooking_time,
+          cooking_time_hours,
+          cooking_time_minutes,
         ]
       );
     } catch (err) {

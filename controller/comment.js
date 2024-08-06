@@ -7,10 +7,10 @@ export const getComment = async (req, res) => {
 
   try {
     const result = await db.query(
-      "SELECT r.*,u.username,u.profile_img FROM recipe_comment AS r INNER JOIN user_profile AS u ON r.user_id = u.id WHERE r.post_id = $1",
+      "SELECT r.*,u.username,u.profile_img FROM recipe_comment AS r INNER JOIN user_profile AS u ON r.user_id = u.id WHERE r.post_id = $1 ORDER BY r.created_time DESC",
       [postId]
     );
-  
+
     return res.status(200).send(result.rows);
   } catch (err) {
     return res.status(500).send(err);

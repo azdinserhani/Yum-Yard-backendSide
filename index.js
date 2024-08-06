@@ -4,11 +4,15 @@ import authRoute from "./routes/auth.js";
 import postRout from "./routes/posts.js";
 import userRoute from "./routes/user.js";
 import relationshipsRoute from "./routes/relationships.js";
-import commentroute from "./routes/comment.js"
+import commentroute from "./routes/comment.js";
+import bookmarkRoute from "./routes/boockmark.js";
+import likeRoute from "./routes/likes.js"
+import ratingRoute from "./routes/rating.js"
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import "dotenv/config";
 import multer from "multer";
+
 
 const port = process.env.PORT;
 const app = express();
@@ -53,6 +57,9 @@ app.use("/api/posts", postRout);
 app.use("/api/users", userRoute);
 app.use("/api/relation", relationshipsRoute);
 app.use("/api/comments", commentroute);
+app.use("/api/bookmark", bookmarkRoute);
+app.use("/api/likes", likeRoute);
+app.use("/api/rating", ratingRoute);
 
 app.listen(port, () => {
   console.log(`server run in port ${port}`);
